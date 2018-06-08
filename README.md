@@ -26,7 +26,9 @@ $ npm install pinst --save-dev
 $ npm publish
 ```
 
-_On prepublishOnly, `postinstall` will be renamed to `_postinstall` (disabled), on postpublish, `_postinstall` will be renamed back to `postinstall` (enabled)_
+_On `prepublishOnly`, `postinstall` will be renamed to `_postinstall` (disabled)_
+
+_On `postpublish`, it will be renamed back to `postinstall` (enabled)_
 
 ## CLI
 
