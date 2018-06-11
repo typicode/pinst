@@ -4,7 +4,7 @@
 
 This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected.
 
-For example: installing peer dependencies, running build step, showing a message, ...
+For example: setting up things, installing peer dependencies, running build step, showing a message, ...
 
 ## Usage
 
