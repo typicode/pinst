@@ -4,6 +4,8 @@
 
 This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected.
 
+For example: installing peer dependencies, running build step, showing a message, ...
+
 ## Usage
 
 ```sh
@@ -29,6 +31,8 @@ $ npm publish
 _On `prepublishOnly`, `postinstall` will be renamed to `_postinstall` (disabled)_
 
 _On `postpublish`, it will be renamed back to `postinstall` (enabled)_
+
+_Tip: by inverting commands, you can also use `pinst` to enable `postinstall` for your users only and not yourself_
 
 ## CLI
 
