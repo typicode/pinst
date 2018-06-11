@@ -9,12 +9,12 @@ const cli = meow(
   Options
     --enable, -e   Enable postinstall hook
     --disable, -d  Disable postinstall hook
+    --silent, -s
 
   Examples
     $ pinst --enable
 `,
   {
-    booleanDefault: undefined,
     flags: {
       enable: {
         type: 'boolean',
@@ -23,6 +23,10 @@ const cli = meow(
       disable: {
         type: 'boolean',
         alias: 'd'
+      },
+      silent: {
+        type: 'boolean',
+        alias: 's'
       }
     }
   }
@@ -30,12 +34,12 @@ const cli = meow(
 
 function run(cli) {
   if (cli.flags.enable) {
-    console.log('pinst enable')
+    if (!cli.flags.silent) console.log('pinst enable')
     return enableAndSave()
   }
 
   if (cli.flags.disable) {
-    console.log('pinst disable')
+    if (!cli.flags.silent) console.log('pinst disable')
     return disableAndSave()
   }
 

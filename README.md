@@ -30,8 +30,6 @@ _On `prepublishOnly`, `postinstall` will be renamed to `_postinstall` (disabled)
 
 _On `postpublish`, it will be renamed back to `postinstall` (enabled)_
 
-_Tip: by inverting commands, you can also use `pinst` to enable `postinstall` for your users only and not yourself_
-
 ## CLI
 
 `pinst` accepts the following flags
@@ -39,6 +37,7 @@ _Tip: by inverting commands, you can also use `pinst` to enable `postinstall` fo
 ```
 --enable, -e   Enable postinstall hook
 --disable, -d  Disable postinstall hook
+--silent, -s
 ```
 
 ## Try it
@@ -49,6 +48,12 @@ You can test that everything works, without actually publishing your package, by
 npm run prepublishOnly # Check package.json
 npm run postpublish    # Check package.json
 ```
+
+# Tips
+
+By inverting commands, you can also use `pinst` to enable `postinstall` for your users only and not yourself.
+
+`pinst` also supports `install` alias.
 
 ## License
 

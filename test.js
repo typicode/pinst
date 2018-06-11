@@ -10,21 +10,25 @@ const {
 const enabledPkg = {
   scripts: {
     start: '',
-    postinstall: 'postinstall'
+    postinstall: 'postinstall',
+    install: 'install' //  Alias for postinstall
   }
 }
 
 const disabledPkg = {
   scripts: {
     start: '',
-    _postinstall: 'postinstall'
+    _postinstall: 'postinstall',
+    _install: 'install' // Alias for postinstall
   }
 }
 
 const pkgFile = 'package.json'
 
 test('enableScript', () => {
-  expect(enableScript(disabledPkg, 'postinstall')).toEqual(enabledPkg)
+  expect(
+    enableScript(enableScript(disabledPkg, 'postinstall'), 'install')
+  ).toEqual(enabledPkg)
 })
 
 test('enableAndSave', () => {
@@ -39,7 +43,9 @@ test('enableAndSave', () => {
 })
 
 test('disableScript', () => {
-  expect(disableScript(enabledPkg, 'postinstall')).toEqual(disabledPkg)
+  expect(
+    disableScript(disableScript(enabledPkg, 'postinstall'), 'install')
+  ).toEqual(disabledPkg)
 })
 
 test('disableAndSave', () => {

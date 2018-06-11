@@ -30,13 +30,13 @@ function disableScript(pkg, name) {
 
 function enableAndSave() {
   const pkg = loadJsonFile.sync(PKG_FILE)
-  const newPkg = enableScript(pkg, 'postinstall')
+  const newPkg = enableScript(enableScript(pkg, 'postinstall'), 'install')
   writeJsonFile.sync(PKG_FILE, newPkg, { indent: 2 })
 }
 
 function disableAndSave() {
   const pkg = loadJsonFile.sync(PKG_FILE)
-  const newPkg = disableScript(pkg, 'postinstall')
+  const newPkg = disableScript(disableScript(pkg, 'postinstall'), 'install')
   writeJsonFile.sync(PKG_FILE, newPkg, { indent: 2 })
 }
 
