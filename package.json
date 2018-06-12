@@ -37,11 +37,15 @@
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-xo-space": "^0.18.0",
+    "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-prettier": "^2.6.0",
     "husky": "^1.0.0-rc.8",
     "jest": "^22.4.4",
     "pkg-ok": "^2.2.0",
     "prettier": "1.12.1"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   },
   "husky": {
     "hooks": {

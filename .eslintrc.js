@@ -1,7 +1,8 @@
 module.exports = {
-  extends: ['xo-space/esnext', 'prettier'],
-  plugins: ['prettier'],
+  extends: ['plugin:node/recommended', 'xo-space/esnext', 'prettier'],
+  plugins: ['node', 'prettier'],
   rules: {
+    'no-process-exit': 'off',
     'prettier/prettier': [
       'error',
       {

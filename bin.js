@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const meow = require('meow')
 const { enableAndSave, disableAndSave } = require('./index')
 
