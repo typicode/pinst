@@ -49,7 +49,7 @@ npm run prepublishOnly # Check package.json
 npm run postpublish    # Check package.json
 ```
 
-# Tips
+## Tips
 
 By inverting commands, you can also use `pinst` to enable `postinstall` for your users only and not yourself.
 
