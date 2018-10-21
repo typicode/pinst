@@ -1,8 +1,10 @@
 # pinst [![Build Status](https://travis-ci.org/typicode/pinst.svg?branch=master)](https://travis-ci.org/typicode/pinst) [![npm](https://img.shields.io/npm/v/pinst.svg)](https://www.npmjs.com/package/pinst)
 
-> `pinst` lets you have `postinstall` hook that runs only in development 🍺
+> `pinst` lets you have `postinstall` hook that runs only in dev 🍺
 
-This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected. Alternatively, you can also use it the other way around and prevent `postinstall` hook to run in dev (that's how I'm using it for [husky](https://github.com/typicode/husky)).
+This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected. 
+
+Alternatively, you can also use it the other way around and prevent `postinstall` hook to run in dev (that's how I'm using it for [husky](https://github.com/typicode/husky)).
 
 ## Usage
 
