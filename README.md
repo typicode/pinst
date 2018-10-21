@@ -2,7 +2,7 @@
 
 > `pinst` lets you have `postinstall` hook that runs only in development 🍺
 
-This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected.
+This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected. Alternatively, you can also use it the other way around and prevent `postinstall` hook to run in dev (that's how I'm using it for [husky](https://github.com/typicode/husky)).
 
 ## Usage
 
