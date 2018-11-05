@@ -51,5 +51,8 @@
     "hooks": {
       "pre-commit": "npm test && npm run lint"
     }
+  },
+  "jest": {
+    "testURL": "http://localhost/"
   }
 }
