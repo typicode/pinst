@@ -19,17 +19,17 @@ const cli = meow(
     flags: {
       enable: {
         type: 'boolean',
-        alias: 'e'
+        alias: 'e',
       },
       disable: {
         type: 'boolean',
-        alias: 'd'
+        alias: 'd',
       },
       silent: {
         type: 'boolean',
-        alias: 's'
-      }
-    }
+        alias: 's',
+      },
+    },
   }
 )
 

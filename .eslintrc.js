@@ -7,11 +7,11 @@ module.exports = {
       'error',
       {
         singleQuote: true,
-        semi: false
-      }
-    ]
+        semi: false,
+      },
+    ],
   },
   env: {
-    jest: true
-  }
+    jest: true,
+  },
 }
