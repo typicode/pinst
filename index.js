@@ -2,7 +2,8 @@ const loadJsonFile = require('load-json-file')
 const writeJsonFile = require('write-json-file')
 const mapKeys = require('lodash.mapkeys')
 
-const PKG_FILE = 'package.json'
+const pkgFile = 'package.json'
+const writeJsonFileOpts = { detectIndent: true }
 
 // Rename key in object without changing its position
 function renameKey(obj, prevKey, nextKey) {
@@ -15,7 +16,7 @@ function disable(name) {
 }
 
 function renameScript(pkg, prevName, nextName) {
-  const newPkg = Object.assign({}, pkg)
+  const newPkg = { ...pkg }
   newPkg.scripts = renameKey(pkg.scripts, prevName, nextName)
   return newPkg
 }
@@ -29,20 +30,20 @@ function disableScript(pkg, name) {
 }
 
 function enableAndSave() {
-  const pkg = loadJsonFile.sync(PKG_FILE)
+  const pkg = loadJsonFile.sync(pkgFile)
   const newPkg = enableScript(enableScript(pkg, 'postinstall'), 'install')
-  writeJsonFile.sync(PKG_FILE, newPkg, { indent: 2 })
+  writeJsonFile.sync(pkgFile, newPkg, writeJsonFileOpts)
 }
 
 function disableAndSave() {
-  const pkg = loadJsonFile.sync(PKG_FILE)
+  const pkg = loadJsonFile.sync(pkgFile)
   const newPkg = disableScript(disableScript(pkg, 'postinstall'), 'install')
-  writeJsonFile.sync(PKG_FILE, newPkg, { indent: 2 })
+  writeJsonFile.sync(pkgFile, newPkg, writeJsonFileOpts)
 }
 
 module.exports = {
   enableScript,
   disableScript,
   enableAndSave,
-  disableAndSave
+  disableAndSave,
 }

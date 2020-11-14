@@ -4,23 +4,23 @@ const {
   enableScript,
   enableAndSave,
   disableScript,
-  disableAndSave
+  disableAndSave,
 } = require('./index')
 
 const enabledPkg = {
   scripts: {
     start: '',
     postinstall: 'postinstall',
-    install: 'install' //  Alias for postinstall
-  }
+    install: 'install', //  Alias for postinstall
+  },
 }
 
 const disabledPkg = {
   scripts: {
     start: '',
     _postinstall: 'postinstall',
-    _install: 'install' // Alias for postinstall
-  }
+    _install: 'install', // Alias for postinstall
+  },
 }
 
 const pkgFile = 'package.json'
@@ -38,7 +38,7 @@ test('enableAndSave', () => {
   enableAndSave(pkgFile)
   expect(loadJsonFile.sync).toHaveBeenCalledWith(pkgFile)
   expect(writeJsonFile.sync).toHaveBeenCalledWith(pkgFile, enabledPkg, {
-    indent: 2
+    detectIndent: true,
   })
 })
 
@@ -55,6 +55,6 @@ test('disableAndSave', () => {
   disableAndSave(pkgFile)
   expect(loadJsonFile.sync).toHaveBeenCalledWith(pkgFile)
   expect(writeJsonFile.sync).toHaveBeenCalledWith(pkgFile, disabledPkg, {
-    indent: 2
+    detectIndent: true,
   })
 })
