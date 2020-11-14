@@ -1,4 +1,4 @@
-# pinst [![Build Status](https://travis-ci.org/typicode/pinst.svg?branch=master)](https://travis-ci.org/typicode/pinst) [![npm](https://img.shields.io/npm/v/pinst.svg)](https://www.npmjs.com/package/pinst)
+# pinst ![Node.js CI](https://github.com/typicode/pinst/workflows/Node.js%20CI/badge.svg) [![npm](https://img.shields.io/npm/v/pinst.svg)](https://www.npmjs.com/package/pinst)
 
 > `pinst` lets you have `postinstall` hook that runs only in dev 🍺
 
