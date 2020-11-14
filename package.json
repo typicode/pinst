@@ -4,6 +4,10 @@
   "description": "Enable or disable npm postinstall hook",
   "main": "index.js",
   "bin": "bin.js",
+  "files": [
+    "index.js",
+    "bin.js"
+  ],
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
