@@ -59,4 +59,4 @@ By inverting commands, you can also use `pinst` to enable `postinstall` for your
 
 ## License
 
-MIT - [Typicode :cactus:](https://github.com/typicode) - [Patreon](https://www.patreon.com/typicode)
+MIT - [Typicode :cactus:](https://github.com/typicode)
