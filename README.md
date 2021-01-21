@@ -2,9 +2,7 @@
 
 > `pinst` lets you have `postinstall` hook that runs only in dev 🍺
 
-This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected. 
-
-Alternatively, you can also use it the other way around and prevent `postinstall` hook to run in dev (that's how I'm using it for [husky](https://github.com/typicode/husky)).
+This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected.
 
 ## Usage
 
@@ -16,8 +14,7 @@ $ npm install pinst --save-dev
 // package.json
 {
   "scripts": {
-    "postinstall": "<some command that should run only in dev>",
-    // Add pinst to publish hooks
+    "postinstall": "<some dev only command>",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   }
@@ -51,7 +48,7 @@ $ npm run prepublishOnly
 $ npm run postpublish
 ```
 
-## Tip
+## Tips
 
 By inverting commands, you can also use `pinst` to enable `postinstall` for your users only and not yourself.
 
