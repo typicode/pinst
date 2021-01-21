@@ -1,52 +1,43 @@
 #!/usr/bin/env node
-const meow = require('meow')
+const pkg = require('./package.json')
 const { enableAndSave, disableAndSave } = require('./index')
 
-const cli = meow(
-  `
-  Usage
-    $ pinst 
+const usage = `Usage
+  $ pinst
 
-  Options
-    --enable, -e   Enable postinstall hook
-    --disable, -d  Disable postinstall hook
-    --silent, -s
+Options
+  --enable, -e   Enable postinstall hook
+  --disable, -d  Disable postinstall hook
+  --silent, -s
 
-  Examples
-    $ pinst --enable
-`,
-  {
-    flags: {
-      enable: {
-        type: 'boolean',
-        alias: 'e',
-      },
-      disable: {
-        type: 'boolean',
-        alias: 'd',
-      },
-      silent: {
-        type: 'boolean',
-        alias: 's',
-      },
-    },
-  }
-)
+Examples
+  $ pinst --enable`
 
-function run(cli) {
-  if (cli.flags.enable) {
-    if (!cli.flags.silent) console.log('pinst enable')
+function run(args) {
+  // Silent
+  const silent = args.includes('--silent') || args.includes('-s')
+
+  // Enable
+  if (args.includes('--enable') || args.includes('-e')) {
+    if (!silent) console.log('pinst enable')
     return enableAndSave()
   }
 
-  if (cli.flags.disable) {
-    if (!cli.flags.silent) console.log('pinst disable')
+  // Disable
+  if (args.includes('--disable') || args.includes('-d')) {
+    if (!silent) console.log('pinst disable')
     return disableAndSave()
   }
 
+  // Version
+  if (args.includes('--version') || args.includes('-v')) {
+    return console.log(pkg.version)
+  }
+
   // No known flag provided
-  console.log(cli.showHelp())
+  console.log(usage)
   process.exit(1)
 }
 
-run(cli)
+const [, , ...args] = process.argv
+run(args)

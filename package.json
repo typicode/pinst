@@ -34,7 +34,6 @@
   "dependencies": {
     "load-json-file": "^6.2.0",
     "lodash.mapkeys": "^4.6.0",
-    "meow": "^8.0.0",
     "write-json-file": "^4.3.0"
   },
   "devDependencies": {
