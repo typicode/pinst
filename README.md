@@ -16,8 +16,8 @@ $ npm install pinst --save-dev
 // package.json
 {
   "scripts": {
-    "postinstall": "...",
-    // Add pinst to npm publish hooks
+    "postinstall": "<some command that should run only in dev>",
+    // Add pinst to publish hooks
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   }
@@ -34,7 +34,7 @@ _On `postpublish`, it will be renamed back to `postinstall` (enabled)_
 
 ## CLI
 
-`pinst` accepts the following flags
+`pinst` accepts the following flags:
 
 ```
 --enable, -e   Enable postinstall hook
@@ -44,14 +44,14 @@ _On `postpublish`, it will be renamed back to `postinstall` (enabled)_
 
 ## Try it
 
-You can test that everything works, without actually publishing your package, by manually running the following commands
+To test that everything works without actually publishing your package, you can manually run the following commands:
 
 ```sh
-npm run prepublishOnly # Check package.json
-npm run postpublish    # Check package.json
+$ npm run prepublishOnly
+$ npm run postpublish
 ```
 
-## Tips
+## Tip
 
 By inverting commands, you can also use `pinst` to enable `postinstall` for your users only and not yourself.
 
