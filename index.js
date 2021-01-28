@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const writeJsonFile = require('write-json-file')
-const fromEntries = require('object.fromentries')
+const fromEntries = require('fromentries')
 
 // Read package.json
 function readPkg(dir) {
