@@ -4,10 +4,7 @@
   "description": "Enable or disable npm postinstall hook",
   "main": "index.js",
   "bin": "bin.js",
-  "files": [
-    "index.js",
-    "bin.js"
-  ],
+  "files": ["index.js", "bin.js"],
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
@@ -20,13 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/typicode/pinst.git"
   },
-  "keywords": [
-    "npm",
-    "postinstall",
-    "lifecycle",
-    "dev",
-    "devpostinstall"
-  ],
+  "keywords": ["npm", "postinstall", "lifecycle", "dev", "devpostinstall"],
   "author": "typicode <typicode@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -51,11 +42,6 @@
   },
   "engines": {
     "node": ">=10.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test && npm run lint"
-    }
   },
   "jest": {
     "testURL": "http://localhost/"
