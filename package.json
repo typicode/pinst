@@ -34,8 +34,7 @@
   },
   "homepage": "https://github.com/typicode/pinst#readme",
   "dependencies": {
-    "load-json-file": "^6.2.0",
-    "lodash.mapkeys": "^4.6.0",
+    "object.fromentries": "^2.0.3",
     "write-json-file": "^4.3.0"
   },
   "devDependencies": {
@@ -47,7 +46,8 @@
     "husky": "^5.0.6",
     "jest": "^26.6.3",
     "pkg-ok": "^2.3.1",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "tempy": "^1.0.0"
   },
   "engines": {
     "node": ">=10.0.0"

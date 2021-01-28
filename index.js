@@ -1,49 +1,61 @@
-const loadJsonFile = require('load-json-file')
+const fs = require('fs')
+const path = require('path')
 const writeJsonFile = require('write-json-file')
-const mapKeys = require('lodash.mapkeys')
+const fromEntries = require('object.fromentries')
 
-const pkgFile = 'package.json'
-const writeJsonFileOpts = { detectIndent: true }
-
-// Rename key in object without changing its position
-function renameKey(obj, prevKey, nextKey) {
-  return mapKeys(obj, (_, key) => (key === prevKey ? nextKey : key))
+// Read package.json
+function readPkg(dir) {
+  const file = path.join(dir, 'package.json')
+  return JSON.parse(fs.readFileSync(file, 'utf-8'))
 }
 
-// Prefix script name with _ to disable it
+// Write package.json
+function writePkg(dir, str) {
+  const file = path.join(dir, 'package.json')
+  writeJsonFile.sync(file, str, { detectIndent: true })
+}
+
+// Update package.json
+function updatePkg(dir, fn) {
+  const prev = readPkg(dir)
+  const next = fn(prev)
+  writePkg(dir, next)
+}
+
+// Update pkg.scripts names
+function updateScripts(pkg, fn) {
+  const nextPkg = { ...pkg }
+  nextPkg.scripts = fromEntries(
+    Object.entries(nextPkg.scripts).map(([key, value]) => [fn(key), value]),
+  )
+  return nextPkg
+}
+
+function enable(name) {
+  if (['_install', '_postinstall'].includes(name)) {
+    return name.substring(1)
+  }
+
+  return name
+}
+
 function disable(name) {
-  return `_${name}`
+  if (['install', 'postinstall'].includes(name)) {
+    return `_${name}`
+  }
+
+  return name
 }
 
-function renameScript(pkg, prevName, nextName) {
-  const newPkg = { ...pkg }
-  newPkg.scripts = renameKey(pkg.scripts, prevName, nextName)
-  return newPkg
+function enableAndSave(dir = process.cwd()) {
+  updatePkg(dir, (pkg) => updateScripts(pkg, enable))
 }
 
-function enableScript(pkg, name) {
-  return renameScript(pkg, disable(name), name)
-}
-
-function disableScript(pkg, name) {
-  return renameScript(pkg, name, disable(name))
-}
-
-function enableAndSave() {
-  const pkg = loadJsonFile.sync(pkgFile)
-  const newPkg = enableScript(enableScript(pkg, 'postinstall'), 'install')
-  writeJsonFile.sync(pkgFile, newPkg, writeJsonFileOpts)
-}
-
-function disableAndSave() {
-  const pkg = loadJsonFile.sync(pkgFile)
-  const newPkg = disableScript(disableScript(pkg, 'postinstall'), 'install')
-  writeJsonFile.sync(pkgFile, newPkg, writeJsonFileOpts)
+function disableAndSave(dir = process.cwd()) {
+  updatePkg(dir, (pkg) => updateScripts(pkg, disable))
 }
 
 module.exports = {
-  enableScript,
-  disableScript,
   enableAndSave,
   disableAndSave,
 }

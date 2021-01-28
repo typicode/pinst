@@ -1,60 +1,60 @@
-const loadJsonFile = require('load-json-file')
-const writeJsonFile = require('write-json-file')
-const {
-  enableScript,
-  enableAndSave,
-  disableScript,
-  disableAndSave,
-} = require('./index')
+const fs = require('fs')
+const path = require('path')
+const tempy = require('tempy')
+const { enableAndSave, disableAndSave } = require('./index')
 
-const enabledPkg = {
-  scripts: {
-    start: '',
-    postinstall: 'postinstall',
-    install: 'install', //  Alias for postinstall
-  },
+function createPkg(str) {
+  const dir = tempy.directory()
+  const file = path.join(dir, 'package.json')
+  fs.writeFileSync(file, str, 'utf-8')
+  return { dir, file }
 }
 
-const disabledPkg = {
-  scripts: {
-    start: '',
-    _postinstall: 'postinstall',
-    _install: 'install', // Alias for postinstall
-  },
-}
+const enabledStr = `{
+  "scripts": {
+    "start": "s",
+    "test": "t",
+    "install": "i",
+    "postinstall": "p"
+  }
+}`
 
-const pkgFile = 'package.json'
+const disabledStr = `{
+  "scripts": {
+    "start": "s",
+    "test": "t",
+    "_install": "i",
+    "_postinstall": "p"
+  }
+}`
 
-test('enableScript', () => {
-  expect(
-    enableScript(enableScript(disabledPkg, 'postinstall'), 'install')
-  ).toEqual(enabledPkg)
+// Different indent and order (must be preserved)
+const enabledStr2 = `{
+    "scripts": {
+        "postinstall": "p",
+        "start": "s",
+        "test": "t",
+        "install": "i"
+    }
+}`
+
+const disabledStr2 = `{
+    "scripts": {
+        "_postinstall": "p",
+        "start": "s",
+        "test": "t",
+        "_install": "i"
+    }
+}`
+
+test('enable and write back', () => {
+  const { dir, file } = createPkg(disabledStr)
+  enableAndSave(dir)
+  expect(fs.readFileSync(file, 'utf-8')).toEqual(enabledStr)
 })
 
-test('enableAndSave', () => {
-  loadJsonFile.sync = jest.fn(() => disabledPkg)
-  writeJsonFile.sync = jest.fn()
-
-  enableAndSave(pkgFile)
-  expect(loadJsonFile.sync).toHaveBeenCalledWith(pkgFile)
-  expect(writeJsonFile.sync).toHaveBeenCalledWith(pkgFile, enabledPkg, {
-    detectIndent: true,
-  })
-})
-
-test('disableScript', () => {
-  expect(
-    disableScript(disableScript(enabledPkg, 'postinstall'), 'install')
-  ).toEqual(disabledPkg)
-})
-
-test('disableAndSave', () => {
-  loadJsonFile.sync = jest.fn(() => enabledPkg)
-  writeJsonFile.sync = jest.fn()
-
-  disableAndSave(pkgFile)
-  expect(loadJsonFile.sync).toHaveBeenCalledWith(pkgFile)
-  expect(writeJsonFile.sync).toHaveBeenCalledWith(pkgFile, disabledPkg, {
-    detectIndent: true,
-  })
+test('disable and write back', () => {
+  const { dir, file } = createPkg(enabledStr2)
+  disableAndSave(dir)
+  expect(fs.readFileSync(file, 'utf-8')).toEqual(disabledStr2)
 })
