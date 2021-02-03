@@ -32,7 +32,7 @@ function updateScripts(pkg, fn) {
 }
 
 function enable(name) {
-  if (['_install', '_postinstall'].includes(name)) {
+  if (['_preinstall', '_install', '_postinstall'].includes(name)) {
     return name.substring(1)
   }
 
@@ -40,7 +40,7 @@ function enable(name) {
 }
 
 function disable(name) {
-  if (['install', 'postinstall'].includes(name)) {
+  if (['preinstall', 'install', 'postinstall'].includes(name)) {
     return `_${name}`
   }
 
