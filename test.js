@@ -17,7 +17,8 @@ const enabledStr = `{
     "install": "i",
     "postinstall": "p"
   }
-}`
+}
+`
 
 const disabledStr = `{
   "scripts": {
@@ -26,7 +27,8 @@ const disabledStr = `{
     "_install": "i",
     "_postinstall": "p"
   }
-}`
+}
+`
 
 // Different indent and order (must be preserved)
 const enabledStr2 = `{
@@ -36,7 +38,8 @@ const enabledStr2 = `{
         "test": "t",
         "install": "i"
     }
-}`
+}
+`
 
 const disabledStr2 = `{
     "scripts": {
@@ -45,7 +48,8 @@ const disabledStr2 = `{
         "test": "t",
         "_install": "i"
     }
-}`
+}
+`
 
 test('enable and write back', () => {
   const { dir, file } = createPkg(disabledStr)

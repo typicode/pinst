@@ -1,34 +1,33 @@
 const fs = require('fs')
 const path = require('path')
-const writeJsonFile = require('write-json-file')
 const fromEntries = require('fromentries')
-
-// Read package.json
-function readPkg(dir) {
-  const file = path.join(dir, 'package.json')
-  return JSON.parse(fs.readFileSync(file, 'utf-8'))
-}
-
-// Write package.json
-function writePkg(dir, str) {
-  const file = path.join(dir, 'package.json')
-  writeJsonFile.sync(file, str, { detectIndent: true })
-}
 
 // Update package.json
 function updatePkg(dir, fn) {
-  const prev = readPkg(dir)
-  const next = fn(prev)
-  writePkg(dir, next)
+  // Pkg path
+  const file = path.join(dir, 'package.json')
+
+  // Read pkg
+  let data = fs.readFileSync(file, 'utf-8')
+  const pkg = JSON.parse(data)
+
+  // Update pkg object
+  fn(pkg)
+
+  // Stringify pkg
+  const regex = /^[ ]+|\t+/m
+  const indent = regex.exec(data)?.[0]
+  data = JSON.stringify(pkg, null, indent)
+
+  // Write pkg
+  fs.writeFileSync(file, `${data}\n`)
 }
 
 // Update pkg.scripts names
 function updateScripts(pkg, fn) {
-  const nextPkg = { ...pkg }
-  nextPkg.scripts = fromEntries(
-    Object.entries(nextPkg.scripts).map(([key, value]) => [fn(key), value]),
+  pkg.scripts = fromEntries(
+    Object.entries(pkg.scripts).map(([key, value]) => [fn(key), value])
   )
-  return nextPkg
 }
 
 function enable(name) {
