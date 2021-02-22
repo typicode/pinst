@@ -16,7 +16,8 @@ function updatePkg(dir, fn) {
 
   // Stringify pkg
   const regex = /^[ ]+|\t+/m
-  const indent = regex.exec(data)?.[0]
+  const res = regex.exec(data)
+  const indent = res ? res[0] : null
   data = JSON.stringify(pkg, null, indent)
 
   // Write pkg
