@@ -1,9 +1,11 @@
 {
   "name": "pinst",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Enable or disable npm postinstall hook",
   "main": "index.js",
-  "bin": "bin.js",
+  "bin": {
+    "pinst": "bin.js"
+  },
   "files": [
     "index.js",
     "bin.js"
