@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const fromEntries = require('fromentries')
 
 // Update package.json
 function updatePkg(dir, fn) {
@@ -26,7 +25,7 @@ function updatePkg(dir, fn) {
 
 // Update pkg.scripts names
 function updateScripts(pkg, fn) {
-  pkg.scripts = fromEntries(
+  pkg.scripts = Object.fromEntries(
     Object.entries(pkg.scripts).map(([key, value]) => [fn(key), value])
   )
 }
