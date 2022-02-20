@@ -2,32 +2,24 @@
 
 > `pinst` lets you have `postinstall` hook that runs only in dev 🍺
 
-This can be useful if you want to automatically run commands just after `npm install`, but don't want your package users to be affected.
+__Important__ if your project is using npm or pnpm, you can achieve the desired effect by setting a `prepare` hook instead. `pinst` is mainly useful for Yarn 2+ since it doesn't support `prepare` hook. See https://yarnpkg.com/advanced/lifecycle-scripts
 
 ## Usage
-
-```sh
-$ npm install pinst --save-dev
-```
 
 ```js
 // package.json
 {
   "scripts": {
     "postinstall": "<some dev only command>",
-    "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
   }
 }
 ```
 
-```sh
-$ npm publish
-```
+_On `prepack`, `postinstall` will be renamed to `_postinstall` (disabled)_
 
-_On `prepublishOnly`, `postinstall` will be renamed to `_postinstall` (disabled)_
-
-_On `postpublish`, it will be renamed back to `postinstall` (enabled)_
+_On `postpack`, it will be renamed back to `postinstall` (enabled)_
 
 ## CLI
 
@@ -37,15 +29,6 @@ _On `postpublish`, it will be renamed back to `postinstall` (enabled)_
 --enable, -e   Enable postinstall hook
 --disable, -d  Disable postinstall hook
 --silent, -s
-```
-
-## Try it
-
-To test that everything works without actually publishing your package, you can manually run the following commands:
-
-```sh
-$ npm run prepublishOnly
-$ npm run postpublish
 ```
 
 ## Tips
