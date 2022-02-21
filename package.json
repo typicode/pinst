@@ -17,8 +17,8 @@
     "postinstall": "husky install",
     "preversion": "npm test && npm run lint",
     "postversion": "git push && git push --tags && npm publish",
-    "prepublishOnly": "node bin --disable",
-    "postpublish": "node bin --enable"
+    "prepack": "node bin --disable",
+    "postpack": "node bin --enable"
   },
   "repository": {
     "type": "git",
