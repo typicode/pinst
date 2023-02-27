@@ -1,24 +1,23 @@
 {
-  "name": "pinst",
-  "version": "3.0.0",
+  "name": "@contaazul/pinst",
+  "version": "1.0.0",
   "description": "Enable or disable npm postinstall hook",
   "main": "index.js",
   "bin": {
-    "pinst": "bin.js"
+    "ca-pinst": "bin.js"
   },
   "files": [
     "index.js",
     "bin.js"
   ],
   "scripts": {
+    "preinstall": "npx only-allow yarn",
+    "postinstall": "husky install",
+    "prepack": "node bin --disable",
+    "postpack": "node bin --enable",
     "test": "jest",
     "lint": "eslint .",
-    "fix": "npm run lint -- --fix",
-    "postinstall": "husky install",
-    "preversion": "npm test && npm run lint",
-    "postversion": "git push && git push --tags && npm publish",
-    "prepack": "node bin --disable",
-    "postpack": "node bin --enable"
+    "lint:fix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",
@@ -26,9 +25,11 @@
   },
   "keywords": [
     "npm",
+    "preinstall",
     "postinstall",
     "lifecycle",
     "dev",
+    "devpreinstall",
     "devpostinstall"
   ],
   "author": "typicode <typicode@gmail.com>",
@@ -38,6 +39,7 @@
   },
   "homepage": "https://github.com/typicode/pinst#readme",
   "devDependencies": {
+    "@ca-tools-front/release-it-config": "^7.0.3",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^8.0.0",
     "eslint-config-xo-space": "^0.26.0",
@@ -46,10 +48,14 @@
     "husky": "^5.0.6",
     "jest": "^26.6.3",
     "prettier": "2.2.1",
+    "release-it": "^14.12.4",
     "tempy": "^1.0.0"
   },
   "engines": {
     "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "registry": "http://npm.prod.contaazul.local"
   },
   "jest": {
     "testURL": "http://localhost/"
