@@ -6,8 +6,8 @@ const usage = `Usage
   $ pinst
 
 Options
-  --enable, -e   Enable postinstall hook
-  --disable, -d  Disable postinstall hook
+  --enable, -e   Enable preinstall and postinstall hooks
+  --disable, -d  Disable preinstall and postinstall hooks
   --silent, -s
 
 Examples

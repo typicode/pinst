@@ -33,7 +33,8 @@ const disabledStr = `{
 // Different indent and order (must be preserved)
 const enabledStr2 = `{
     "scripts": {
-        "postinstall": "p",
+        "preinstall": "pre",
+        "postinstall": "post",
         "start": "s",
         "test": "t",
         "install": "i"
@@ -43,7 +44,8 @@ const enabledStr2 = `{
 
 const disabledStr2 = `{
     "scripts": {
-        "_postinstall": "p",
+        "_preinstall": "pre",
+        "_postinstall": "post",
         "start": "s",
         "test": "t",
         "_install": "i"

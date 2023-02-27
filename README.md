@@ -18,9 +18,9 @@
 }
 ```
 
-_On `prepack`, `postinstall` will be renamed to `_postinstall` (disabled)_
+**On `prepack`, `(pre|post)install` will be renamed to `_(pre|post)install` (disabled)**
 
-_On `postpack`, it will be renamed back to `postinstall` (enabled)_
+**On `postpack`, it will be renamed back to `(pre|post)install` (enabled)**
 
 ## CLI
 
